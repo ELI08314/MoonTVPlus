@@ -89,7 +89,7 @@ jobs:
             sed -i '/^\[\[d1_databases\]\]$/,/^$/{ /^\[\[d1_databases\]\]$/d; /^binding = /d; /^database_name = /d; /^database_id = /d; }' wrangler.toml
             echo "D1 configuration removed from wrangler.toml"
           elif [ -n "${{ secrets.D1_DATABASE_ID }}" ]; then
-            sed -i 's/REPLACE_WITH_YOUR_D1_DATABASE_ID/${{ secrets.D1_DATABASE_ID }}/g' wrangler.toml
+            sed -i "s|REPLACE_WITH_YOUR_D1_DATABASE_ID|$D1_ID|g" wrangler.toml
             echo "D1 Database ID replaced successfully"
           else
             echo "⚠️ Storage type is d1 but D1_DATABASE_ID secret not set"
